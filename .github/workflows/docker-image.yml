@@ -22,17 +22,12 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Extract metadata (tags, labels)
-      id: meta
-      uses: docker/metadata-action@v5
-      with:
-        images: ${{ secrets.DOCKER_USERNAME }}/keep-him-up
-        tags: |
-          type=latest
-          type=sha
-
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
         context: .
+        file: ./dockerfile
         push: true
+        tags: |
+          ${{ secrets.DOCKER_USERNAME }}/keep-him-up:v1.0
+          ${{ secrets.DOCKER_USERNAME }}/keep-him-up:${{ github.sha }}
