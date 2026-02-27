@@ -1,4 +1,4 @@
-name: Docker Image CI/CD
+name: Docker Image CI
 
 on:
   push:
@@ -25,7 +25,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v5
       with:
-        images: ${{ secrets.DOCKER_USERNAME }}/my-image-name
+        images: ${{ secrets.DOCKER_USERNAME }}/keep-him-up
         tags: |
           type=latest
           type=sha
